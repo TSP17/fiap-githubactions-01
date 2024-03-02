@@ -1,20 +1,24 @@
+# Definindo o nome do Workflow
+name: Meu primeiro workflow no github actions
+
+# Definindo quando o workflow vai ser disparado
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Definindo os jobs que o workflow executará
 jobs:
-  build:
+  job01:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Build
-        run: make
-      - name: Test
-        run: make test
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: make deploy
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Executando um comando simples
+      run: echo "Ola Mundo! Esse é o primeiro job no GitHub Actions"
+
+    - name: Step 2
+      run: echo "Executando Step 2"
